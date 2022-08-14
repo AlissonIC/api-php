@@ -9,15 +9,15 @@
 		private $params = array();
 
 		public function errorMsg($code='AC000'){
-			$error['AC200'] = 'Ação executada com sucesso!';
-			$error['AC500'] = 'Nenhum dado recebido!';
-			$error['AC501'] = 'Campo prenchido de forma incorreta!';
-			$error['AC502'] = 'Metodo inexistente!';
-			$error['AC503'] = 'Classe inexistente!';
-			$error['AC504'] = 'Banco de dados retornou vazio!';
-			$error['AC505'] = 'Não autenticado!';
-			$error['AC506'] = 'Dado ja existe no bando de dados!';
-			$error['AC000'] = 'Erro desconhecido!';
+			$error['AC200'] = 'Action executed successfully!';
+			$error['AC500'] = 'No data received!';
+			$error['AC501'] = 'Field filled in incorrectly!';
+			$error['AC502'] = 'Non-existent method!';
+			$error['AC503'] = 'Non-existent class!';
+			$error['AC504'] = 'Database returned empty!';
+			$error['AC505'] = 'Not authenticated!';
+			$error['AC506'] = 'Data already exists in the database!';
+			$error['AC000'] = 'Unknown error!';
 
 			if(isset($error[$code])){
 				return $error[$code];
@@ -65,7 +65,7 @@
 				
 			} else {
 
-				return json_encode(array('status' => 'error', 'data' => 'Operação Inválida'));
+				return json_encode(array('status' => 'error', 'data' => 'Invalid Operation'));
 
 			}
 		}
