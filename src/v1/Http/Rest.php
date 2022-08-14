@@ -17,6 +17,7 @@
 			$error['AC504'] = 'Database returned empty!';
 			$error['AC505'] = 'Not authenticated!';
 			$error['AC506'] = 'Data already exists in the database!';
+			$error['AC507'] = 'database connection failed!';
 			$error['AC000'] = 'Unknown error!';
 
 			if(isset($error[$code])){
