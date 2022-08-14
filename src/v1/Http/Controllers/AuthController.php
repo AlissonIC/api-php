@@ -96,7 +96,7 @@
                 $payload = $token[1];
                 $sign = str_replace("\\", "", $token[2]);      
 
-                //Conferir Assinatura
+                // Check Subscription
                 $valid = hash_hmac('sha256', $header . "." . $payload, 'u9egTjcWPDEBo', true);
                 $valid = base64_encode($valid);
 
