@@ -8,22 +8,25 @@
 		private $method;
 		private $params = array();
 
-		public function errorMsg($code='AC000'){
-			$error['AC200'] = 'Action executed successfully!';
-			$error['AC500'] = 'No data received!';
-			$error['AC501'] = 'Field filled in incorrectly!';
-			$error['AC502'] = 'Non-existent method!';
-			$error['AC503'] = 'Non-existent class!';
-			$error['AC504'] = 'Database returned empty!';
-			$error['AC505'] = 'Not authenticated!';
-			$error['AC506'] = 'Data already exists in the database!';
-			$error['AC507'] = 'database connection failed!';
-			$error['AC000'] = 'Unknown error!';
+		public function errorMsg($code='000', $required=''){
+			$error['200'] = 'Action executed successfully!';
+			$error['500'] = 'Please make sure you pass the following parameter(s):';
+			$error['501'] = 'Field filled in incorrectly!';
+			$error['502'] = 'Non-existent method!';
+			$error['503'] = 'Non-existent class!';
+			$error['504'] = 'Database returned empty!';
+			$error['505'] = 'Not authenticated!';
+			$error['506'] = 'Data already exists in the database!';
+			$error['507'] = 'Database connection failed!';
+			$error['000'] = 'Unknown error!';
 
 			if(isset($error[$code])){
+				if($code == 500){
+					return $error[$code]." ".$required;
+				}
 				return $error[$code];
 			} else {
-				return $error['AC000'];
+				return $error['000'];
 			}
 		}
 
@@ -47,6 +50,9 @@
 					if (isset($newUrl[0])) {
 						$this->params = $newUrl;
 					}
+
+					$this->get = $_GET;
+					$this->post = $_POST;
 				}
 			}
 		}
@@ -57,11 +63,11 @@
 
 				try {
 					$controll = "\Api\Http\Controllers\\".$this->class;
-					$response = call_user_func_array(array(new $controll, $this->method), $this->params);
+					$response = call_user_func_array(array(new $controll, $this->method), array($this->params, $this->get, $this->post));
 					return json_encode(array('status' => 'sucess', 'data' => $response));
 				} catch (\Exception $e) {
-					$msg = $this->errorMsg($e->getMessage());
-					return json_encode(array('status' => 'error', 'data' => $msg));
+					$info = $this->errorMsg($e->getCode(), $e->getMessage());
+					return json_encode(array('status' => 'error', 'data' => $info));
 				}
 				
 			} else {

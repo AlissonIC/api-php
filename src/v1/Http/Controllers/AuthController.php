@@ -71,10 +71,10 @@
                     return $result;
 
                 } else {
-                    throw new \Exception('AC501');
+                    throw new \Exception('', '501');
                 }
             } else {
-                throw new \Exception('AC500');
+                throw new \Exception('', '500');
             }
 
         }
@@ -107,4 +107,19 @@
 
             return false;
         } 
+
+        public static function checkReceived($required = array(''), $parameters = array('')){
+            $not_received = array('');
+            foreach ($required as $k => $v) {
+                if(!isset($parameters[$v]) || empty($parameters[$v])){
+                    array_push($not_received, $v);
+                }
+            }
+            $not_received = array_filter($not_received);
+
+            if(!empty($not_received)){
+                throw new \Exception(implode(", ", $not_received), '500');
+            }
+            return true;
+        }
     }

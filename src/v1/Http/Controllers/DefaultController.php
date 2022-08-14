@@ -3,35 +3,40 @@
 
 	class DefaultController {
 
-		public function Show($parameters = null) {      
+		public function Show($parameters = array(''), $get = array(''), $post= array('')) {      
 			if (AuthController::checkAuth()){
-				throw new \Exception('AC000'); // Exemple of return if user is logged
+				throw new \Exception('', '000'); // Exemple of return if user is logged
 			} else {
-				throw new \Exception('AC505');
+				throw new \Exception('', '505');
 			}
 		}
 
-		public function Add($parameters = null) {
+		public function Add($parameters = array(''), $get = array(''), $post= array('')) {
 			if (AuthController::checkAuth()){
-				throw new \Exception('AC000'); // Exemple of return if user is logged
+                
+				$required = ["name", "document", "birthday", "company", "mail", "password"];
+				if (AuthController::checkReceived($required, $post)){
+                    throw new \Exception('', '000'); // Exemple of return if user is logged
+                }
+
 			} else {
-				throw new \Exception('AC505');
+				throw new \Exception('', '505');
 			}
 		}
 
-		public function Edit($parameters = null) {    
+		public function Edit($parameters = array(''), $get = array(''), $post= array('')) {    
 			if (AuthController::checkAuth()){
-				throw new \Exception('AC000'); // Exemple of return if user is logged
+				throw new \Exception('', '000'); // Exemple of return if user is logged
 			} else {
-				throw new \Exception('AC505');
+				throw new \Exception('', '505');
 			}
 		}
 
-		public function Del($parameters = null) {   
+		public function Del($parameters = array(''), $get = array(''), $post= array('')) {   
 			if (AuthController::checkAuth()){
-				throw new \Exception('AC000'); // Exemple of return if user is logged
+				throw new \Exception('', '000'); // Exemple of return if user is logged
 			} else {
-				throw new \Exception('AC505');
+				throw new \Exception('', '505');
 			}
 		}
 
