@@ -1,0 +1,9 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src/v1"
+        }
+    },
+    "require": {
+    }
+}
